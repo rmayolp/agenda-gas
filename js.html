@@ -1,8 +1,8 @@
 <script>
 
-const NOTIFICAION_OK = 1;
-const NOTIFICAION_DANGER = 2;
-const NOTIFICAION_WARNING = 3;
+    // const NOTIFICAION_OK = 1;
+    // const NOTIFICAION_DANGER = 2;
+    // const NOTIFICAION_WARNING = 3;
     
     function crearTablaContactos()
     {
@@ -60,16 +60,83 @@ const NOTIFICAION_WARNING = 3;
         document.getElementById('divContactos').appendChild(tabla);
 
         //Mostrar notificacio d'OK
-        crearNotificacion(NOTIFICAION_OK,'Contactes obtinguts correctament',' Tot correcte');
+        crearNotificacionOK('Contactes obtinguts correctament',' Tot correcte');
     }
 
     function crearTablaContactosError ()
     {
         // Mostrar notificacio error
-        crearNotificacion(NOTIFICAION_DANGER,'No ERROR en la obtenció de Contactes',' Houston, we"ve a problem');
+        crearNotificacionError('No ERROR en la obtenció de Contactes',' Houston, we"ve a problem');
     }
 
-    function crearNotificacion( tipo, mensaje, titulo)
+    function crearNotificacion ( mensaje, titulo ){
+        //console.log('Entro Crear Notificacio');
+        let mensajeNotificacion = document.getElementById('mensajeNotificacion')
+        if ( mensajeNotificacion == null) console.log('Error al accedir al Id mensajeNotificacion');
+        else mensajeNotificacion.textContent = mensaje;
+        
+        let tituloNotificacion = document.getElementById('tituloNotificacion');
+        if ( tituloNotificacion == null ) console.log('Error al accedir al Id tituloNotificacion');
+        else  tituloNotificacion.textContent = titulo;
+
+        let elementoNotificacion = document.getElementById('notificacion');
+        if ( elementoNotificacion == null) console.log('Error al accedir al Id notificacion');
+        else bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
+        
+    }
+
+    function crearNotificacionOK( mensaje, titulo ){
+        //console.log('Entro Crear NotificacioOK');
+        crearIconoNotificacionOK();
+        crearColorNotificacion('--color-verde-oscuro');
+        crearNotificacion( mensaje, titulo);
+        
+    }
+    
+    function crearNotificacionError( mensaje, titulo ){
+        crearIconoNotificacionError();
+        crearColorNotificacion('--color-rojo-oscuro');
+        crearNotificacion( mensaje, titulo);
+    }
+
+    function crearNotificacionAdvertencia( mensaje, titulo ){
+        
+        crearIconoNotificacionAdvertencia();
+        crearColorNotificacion('--color-amarillo-oscuro');
+        crearNotificacion( mensaje, titulo);
+    }
+
+    function crearIconoNotificacionOK(){
+        //console.log('Entro Crear IconaOK');
+        let iconoNotificacion = document.getElementById('iconoNotificacion');
+        if ( iconoNotificacion == null ) console.log('Error al accedir al Id iconoNotificacion');
+        else {
+            iconoNotificacion.className = '';
+            iconoNotificacion.classList.add('bi','bi-check2-square');
+        }
+
+        //document.getElementById('iconoNotificacion').className = '';
+        //document.getElementById('iconoNotificacion').classList.add('bi','bi-check2-square');
+    }
+
+    function crearIconoNotificacionError(){
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi','bi-bug');
+    }
+
+    function crearIconoNotificacionAdvertencia(){
+        document.getElementById('iconoNotificacion').className = '';
+        document.getElementById('iconoNotificacion').classList.add('bi','bi-exclamation-square');
+    }
+
+    function crearColorNotificacion(color){
+        //console.log('Entro Crear COlor');
+        let elementoNotificacion = document.getElementById('notificacion');
+        if ( elementoNotificacion == null ) console.log('Error al accedir al Id notificacion');
+        else elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
+    }
+
+    function crearNotificacionOLD( tipo, mensaje, titulo)
     {
         console.log('Datos tipus: '+ tipo);
         //Obtener los datos
