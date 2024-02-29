@@ -3,7 +3,41 @@
     // const NOTIFICAION_OK = 1;
     // const NOTIFICAION_DANGER = 2;
     // const NOTIFICAION_WARNING = 3;
+
+    function insertarContacto()
+    {
+        //Obtener datos del formulario
+        let nombre = document.getElementById('nombre').value;
+        let correo = document.getElementById('correo').value;
+
+        eliminarTabla();
+
+        google.script.run
+            .withSuccessHandler( contactoInsertadoCorrectanmente )
+            .withFailureHandler( contactoInsertadoError )
+            .insertarContacto( nombre, correo);
+    }
     
+    function contactoInsertadoCorrectanmente()
+    {
+        document.getElementById('nombre').value = '';
+        document.getElementById('correo').value = '';
+        crearNotificacionOK('Alta contacte ok',' Tot correcte');
+        eliminarLoader();
+        //Refrescar la taula
+        crearTablaContactos();
+    }
+
+    function contactoInsertadoError()
+    {
+        crearNotificacionError('No he pogut donar dalta',' ERROR');
+        eliminarLoader();
+        //Refrescar la taula
+        crearTablaContactos();
+    }
+
+
+
     function crearTablaContactos()
     {
         eliminarTabla();

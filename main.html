@@ -1,8 +1,27 @@
 <main>
+    
 
-    <!-- Botonets -->
-    <div class="d-flex justify-content-center mb-4">
-        <button class="btn btn-success m-3 " onclick="crearTablaContactos()">Mostrar contactes</button>
+    <div class="d-flex justify-content-center my-3">
+    <!-- Formualri -->
+    <!-- action posa la URL de PRova (en el GAS, implementació, prova) -->
+    <!-- <form action="https://script.google.com/macros/s/AKfycbzm9fytS3BoRZfpvetb0TNsP3lSnD6JNZJPoU6pYXt3/dev" method="post" id="formulario" > -->
+
+        <!-- Ni Post ni Get -->
+        <form onsubmit="insertarContacto()" method="dialog" id="formulario">
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del contacto:</label>
+            <input type="text" class="form-control" name="nombre" id="nombre">
+        </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Email:</label>
+            <input type="email" class="form-control" name="correo" id="correo">
+        </div>
+        <!-- Botonets -->
+        <button type="button" class="btn btn-success m-3 " onclick="crearTablaContactos()">Mostrar contactes</button>
+        <button type="submit" class="btn btn-primary">Crear contacte</button>
+    </form>
+
     </div>
 
     <!-- Taula dades -->
